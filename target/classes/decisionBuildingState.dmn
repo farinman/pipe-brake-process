@@ -7,7 +7,7 @@
     <decisionTable id="decisionTable_1">
       <input id="input_1">
         <inputExpression id="inputExpression_1" typeRef="integer">
-          <text>buildingState</text>
+          <text>building.buildingState</text>
         </inputExpression>
       </input>
       <output id="output_1" name="Activity" typeRef="string" />

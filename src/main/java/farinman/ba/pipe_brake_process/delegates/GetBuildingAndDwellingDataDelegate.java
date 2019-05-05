@@ -35,6 +35,7 @@ public class GetBuildingAndDwellingDataDelegate implements JavaDelegate {
 	//private BuildingRepository buildingRepository;
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
+		
 		Device device = new Device();
 		Dwelling dwelling = new Dwelling();
 		Building building = new Building();
@@ -45,22 +46,17 @@ public class GetBuildingAndDwellingDataDelegate implements JavaDelegate {
 		if(optionalDevice.isPresent()) {
 			//Falls vorhanden, dem Objekt Device das Resultat zuordnen
 			device = optionalDevice.get();
-		}else {
-			System.out.println("Device doesn't exist");
 		}
 		
 		dwelling = device.getDwelling();
 		building = dwelling.getBuilding();
 		
-		int buildingState = building.getBuildingState();
-		execution.setVariable("buildingState", buildingState);
+		//int buildingState = building.getBuildingState();
 		execution.setVariable("humidity", 65);
+		//execution.setVariable("buildingState", buildingState);
+		execution.setVariable("dwelling", dwelling);
 		execution.setVariable("building", building);
-		System.out.println("<---------------------------- B&D DATA ---------------------------->");
-		System.out.println("Dwelling Id: "+dwelling.getId());
-		System.out.println("Building Id: "+building.getId());
-		System.out.println("Building State: "+buildingState);
-		
+		execution.setVariable("device", device);
 
 	}
 

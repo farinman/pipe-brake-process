@@ -30,4 +30,28 @@ public class Person implements Serializable{
     	inverseJoinColumns = @JoinColumn(name = "DWELLING_ID")
     )
     private List<Dwelling> dwellings = new ArrayList<>();
+    
+    private Boolean principalTenant;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public List<Dwelling> getDwellings() {
+		return dwellings;
+	}
+
+	public Boolean isPrincipalTenant() {
+		return principalTenant;
+	}
+    
+    
 }
