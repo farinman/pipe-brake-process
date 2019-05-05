@@ -19,6 +19,7 @@ Die Particle Console wird über einen HTTP request angesprochen, um somit Aktuat
 
 Die Particle Console wird über einen HTTP request angesprochen, um somit Aktuatoren zu steuern.</bpmn:documentation>
     </bpmn:participant>
+    <bpmn:participant id="Participant_1hyvntw" name="Ticketsystem" />
     <bpmn:messageFlow id="MessageFlow_1afkpbn" name="Datentransfer" sourceRef="Participant_0ncytfd" targetRef="ParticleConsoleParticipant" />
     <bpmn:messageFlow id="MessageFlow_1eqy248" name="Code Deployment" sourceRef="ParticleConsoleParticipant" targetRef="Participant_0ncytfd">
       <bpmn:documentation>In diesem Schritt wird der Verwendete code an dem Arduino bereitgestellt.</bpmn:documentation>
@@ -37,20 +38,21 @@ timestamp: String
 arduinoName: String</bpmn:documentation>
     </bpmn:messageFlow>
     <bpmn:messageFlow id="iotCommand" name="Aktuator Befel" sourceRef="Task_15872fw" targetRef="Participant_0ncytfd" />
+    <bpmn:messageFlow id="MessageFlow_1f37mr9" sourceRef="Task_0rh19ch" targetRef="Participant_1hyvntw" />
   </bpmn:collaboration>
   <bpmn:process id="Process_1" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1yxzku3">
       <bpmn:lane id="Lane_01xcbgc">
-        <bpmn:flowNodeRef>Task_0rh19ch</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>closeWater</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1cd7fbu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_06xu0rr</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_10nf5r8</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>contactSpecialistOrFmworker</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_02r4afd</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1bl7p3f</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0s1h1y3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1f0ntdi</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_02r4afd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_10nf5r8</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0rh19ch</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1f9769f">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
@@ -74,10 +76,6 @@ arduinoName: String</bpmn:documentation>
       <bpmn:outgoing>SequenceFlow_1ip7m4v</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1qol59i</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Task_10nf5r8" name="Zuständige FM-MA finden" camunda:delegateExpression="${getWorkersInAreaAdapter}">
-      <bpmn:incoming>SequenceFlow_1ip7m4v</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_163jkoc</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1ip7m4v" sourceRef="contactSpecialistOrFmworker" targetRef="Task_10nf5r8">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${activity == "MF-MA"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -91,10 +89,6 @@ arduinoName: String</bpmn:documentation>
     <bpmn:sequenceFlow id="SequenceFlow_03tf37k" sourceRef="ExclusiveGateway_1bl7p3f" targetRef="Task_1f0ntdi" />
     <bpmn:sequenceFlow id="SequenceFlow_1e7buif" sourceRef="ExclusiveGateway_1bl7p3f" targetRef="contactSpecialistOrFmworker" />
     <bpmn:sequenceFlow id="SequenceFlow_04wl5c0" sourceRef="Task_1cd7fbu" targetRef="Task_0s1h1y3" />
-    <bpmn:task id="Task_0rh19ch" name="Spezialist kontaktieren">
-      <bpmn:incoming>SequenceFlow_1qol59i</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_13h94eh</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_13h94eh" sourceRef="Task_0rh19ch" targetRef="Task_06xu0rr" />
     <bpmn:sequenceFlow id="SequenceFlow_163jkoc" sourceRef="Task_10nf5r8" targetRef="EndEvent_02r4afd" />
     <bpmn:sequenceFlow id="SequenceFlow_16waz3y" sourceRef="Task_06xu0rr" targetRef="EndEvent_02r4afd" />
@@ -114,11 +108,6 @@ arduinoName: String</bpmn:documentation>
     <bpmn:sequenceFlow id="SequenceFlow_0p1hc9w" sourceRef="closeWater" targetRef="Task_15872fw">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${riskMessage== 'closeWater'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:endEvent id="EndEvent_02r4afd">
-      <bpmn:incoming>SequenceFlow_163jkoc</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_16waz3y</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0rklft3</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:endEvent id="endOfProcess1">
       <bpmn:incoming>SequenceFlow_1m4k68u</bpmn:incoming>
     </bpmn:endEvent>
@@ -141,6 +130,19 @@ arduinoName: String</bpmn:documentation>
       <bpmn:documentation>Wenn</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_0p1hc9w</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1m4k68u</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="EndEvent_02r4afd">
+      <bpmn:incoming>SequenceFlow_16waz3y</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0rklft3</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_163jkoc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask id="Task_10nf5r8" name="Zuständige FM-MA finden" camunda:delegateExpression="${contactWorkersInAreaAdapter}">
+      <bpmn:incoming>SequenceFlow_1ip7m4v</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_163jkoc</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="Task_0rh19ch" name="&#10;&#10;Spezialistanfrage-Nachricht an &#10;Ticketsystem senden&#10;" camunda:delegateExpression="{sendSpecialistRequestToTicketSystemAdapter}">
+      <bpmn:incoming>SequenceFlow_1qol59i</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_13h94eh</bpmn:outgoing>
     </bpmn:sendTask>
   </bpmn:process>
   <bpmn:message id="Message_193hlgk" name="Message_2s1m8of" />
@@ -215,9 +217,6 @@ arduinoName: String</bpmn:documentation>
       <bpmndi:BPMNShape id="ExclusiveGateway_09fh5o1_di" bpmnElement="contactSpecialistOrFmworker" isMarkerVisible="true">
         <dc:Bounds x="978" y="649" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_0zprjbk_di" bpmnElement="Task_10nf5r8">
-        <dc:Bounds x="1123" y="634" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1ip7m4v_di" bpmnElement="SequenceFlow_1ip7m4v">
         <di:waypoint x="1028" y="674" />
         <di:waypoint x="1123" y="674" />
@@ -251,25 +250,23 @@ arduinoName: String</bpmn:documentation>
         <di:waypoint x="778" y="675" />
         <di:waypoint x="791" y="675" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_0kzn9tm_di" bpmnElement="Task_0rh19ch">
-        <dc:Bounds x="1123" y="517" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_13h94eh_di" bpmnElement="SequenceFlow_13h94eh">
         <di:waypoint x="1223" y="557" />
         <di:waypoint x="1318" y="557" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_02r4afd_di" bpmnElement="EndEvent_02r4afd">
-        <dc:Bounds x="1556" y="656" width="36" height="36" />
+        <dc:Bounds x="1559" y="657" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_163jkoc_di" bpmnElement="SequenceFlow_163jkoc">
         <di:waypoint x="1223" y="674" />
-        <di:waypoint x="1556" y="674" />
+        <di:waypoint x="1262" y="675" />
+        <di:waypoint x="1559" y="675" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_16waz3y_di" bpmnElement="SequenceFlow_16waz3y">
         <di:waypoint x="1418" y="557" />
         <di:waypoint x="1488" y="557" />
-        <di:waypoint x="1488" y="674" />
-        <di:waypoint x="1556" y="674" />
+        <di:waypoint x="1488" y="675" />
+        <di:waypoint x="1559" y="675" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0nlcxhw_di" bpmnElement="closeWater" isMarkerVisible="true">
         <dc:Bounds x="1343" y="755" width="50" height="50" />
@@ -280,8 +277,8 @@ arduinoName: String</bpmn:documentation>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0rklft3_di" bpmnElement="SequenceFlow_0rklft3">
         <di:waypoint x="1368" y="755" />
-        <di:waypoint x="1368" y="674" />
-        <di:waypoint x="1556" y="674" />
+        <di:waypoint x="1368" y="675" />
+        <di:waypoint x="1559" y="675" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0p1hc9w_di" bpmnElement="SequenceFlow_0p1hc9w">
         <di:waypoint x="1368" y="805" />
@@ -317,6 +314,19 @@ arduinoName: String</bpmn:documentation>
       <bpmndi:BPMNShape id="SendTask_14ayx7i_di" bpmnElement="Task_15872fw">
         <dc:Bounds x="1407" y="977" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_0tb7uww_di" bpmnElement="Task_10nf5r8">
+        <dc:Bounds x="1123" y="634" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_1hyvntw_di" bpmnElement="Participant_1hyvntw">
+        <dc:Bounds x="823" y="251" width="609" height="84" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_1naisqh_di" bpmnElement="Task_0rh19ch">
+        <dc:Bounds x="1123" y="517" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_1f37mr9_di" bpmnElement="MessageFlow_1f37mr9">
+        <di:waypoint x="1173" y="517" />
+        <di:waypoint x="1173" y="337" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

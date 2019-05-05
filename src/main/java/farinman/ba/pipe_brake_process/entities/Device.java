@@ -16,6 +16,8 @@ public class Device implements Serializable{
     @ManyToOne
     @JoinColumn(name = "DWELLING_ID")
     private Dwelling dwelling;
+    
+    private String locationInDwelling;
 
 	public String getId() {
 		return id;
@@ -27,6 +29,10 @@ public class Device implements Serializable{
 
 	public Dwelling getDwelling() {
 		return dwelling;
+	}
+
+	public String getLocationInDwelling() {
+		return locationInDwelling;
 	}
 
 }

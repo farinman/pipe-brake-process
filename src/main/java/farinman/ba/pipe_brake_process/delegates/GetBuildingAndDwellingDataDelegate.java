@@ -55,6 +55,7 @@ public class GetBuildingAndDwellingDataDelegate implements JavaDelegate {
 		int buildingState = building.getBuildingState();
 		execution.setVariable("buildingState", buildingState);
 		execution.setVariable("humidity", 65);
+		execution.setVariable("building", building);
 		System.out.println("<---------------------------- B&D DATA ---------------------------->");
 		System.out.println("Dwelling Id: "+dwelling.getId());
 		System.out.println("Building Id: "+building.getId());

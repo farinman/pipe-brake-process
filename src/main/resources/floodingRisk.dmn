@@ -18,7 +18,7 @@
           <text>[1..3]</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0srwvu2">
-          <text>64.99</text>
+          <text>[0..65]</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_08991w3">
           <text>"ok"</text>
@@ -29,10 +29,43 @@
           <text>[4..6]</text>
         </inputEntry>
         <inputEntry id="UnaryTests_04pk5oo">
-          <text>65.00</text>
+          <text>&gt;= 65</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0u0dqjz">
           <text>"closeWater"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19al03o">
+        <inputEntry id="UnaryTests_1f6n7pa">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jjlh2v">
+          <text>&gt;= 95</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1qqfyhd">
+          <text>"closeWater"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1co65ko">
+        <inputEntry id="UnaryTests_0z97zrs">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sifhmq">
+          <text>&gt;= 85</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fa3o6e">
+          <text>"closeWater"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00xt6w3">
+        <inputEntry id="UnaryTests_14buiah">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rt7h3u">
+          <text>&gt;= 75</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0mj6zlp">
+          <text></text>
         </outputEntry>
       </rule>
     </decisionTable>
