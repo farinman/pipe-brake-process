@@ -18,6 +18,7 @@ public class CloseWaterDelegate implements JavaDelegate{
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
+		
 		String deviceId = (String) execution.getVariable("deviceId");
 		String action = "blinkGreen";
 		String accessToken = "a1041533a33b1618277a3e4f4bb0532aa95b3498";
@@ -30,8 +31,7 @@ public class CloseWaterDelegate implements JavaDelegate{
 	    RestTemplate restTemplate = new RestTemplate();
 	    
 	    ResponseEntity<String> s = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-	    //String result = restTemplate.getForObject(uri, String.class);
-	    System.out.println(s.getBody().toString());
+	    //System.out.println(s.getBody().toString());
 		
 	}
 }

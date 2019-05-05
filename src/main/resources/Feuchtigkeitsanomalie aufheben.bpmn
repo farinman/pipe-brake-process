@@ -106,7 +106,7 @@ arduinoName: String</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_1ip7m4v</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_163jkoc</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="Task_0rh19ch" name="&#10;&#10;Spezialistanfrage-Nachricht an &#10;Ticketsystem senden&#10;" camunda:delegateExpression="{sendSpecialistRequestToTicketSystemAdapter}">
+    <bpmn:sendTask id="Task_0rh19ch" name="&#10;&#10;Spezialistanfrage-Nachricht an &#10;Ticketsystem senden&#10;" camunda:delegateExpression="${sendSpecialistRequestToTicketSystemAdapter}">
       <bpmn:incoming>SequenceFlow_1qol59i</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_13h94eh</bpmn:outgoing>
     </bpmn:sendTask>

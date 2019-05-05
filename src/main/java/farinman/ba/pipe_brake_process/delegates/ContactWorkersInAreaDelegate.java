@@ -49,10 +49,11 @@ public class ContactWorkersInAreaDelegate extends SendMailHelper implements Java
 			text += "Hallo ";
 			text += worker.getName()+"\n\n";
 			text += "Es wurde eine Feuchtugkeits-Anomalie wahrgenommen.\n\n";
+			text += "----------Gebäude----------\n\n";
 			text += "Strasse: "+building.getStreet()+" "+building.getBuildingNumber()+"\n";
 			text += "Ort / PLZ: "+building.getPlace()+" "+building.getPostCode()+"\n\n";
-			text += "----------Gebäude----------\n\n";
-			text += "Land: "+building.getCountry()+"\n\n";
+			text += "Land: "+building.getCountry()+"\n";
+			text += "Zone: "+area.getName()+"\n\n";
 			text += "----------Wohnung----------\n\n";
 			text += "Stockwerk: "+dwelling.getFloor()+"\n";
 			text += "Türe: "+dwelling.getDoor()+" \n";
