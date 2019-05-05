@@ -13,8 +13,8 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
  * 
  * 
  */
-@Named("sendMailToWorkerAdapter")
-public class SendMailToWorkerDelegate implements JavaDelegate {
+@Named("getWorkersInAreaAdapter")
+public class GetWorkersInAreaDelegate implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {

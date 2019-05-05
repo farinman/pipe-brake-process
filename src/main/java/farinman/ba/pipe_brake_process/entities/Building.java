@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name = "Building")
@@ -28,7 +29,11 @@ public class Building implements Serializable{
 	@JoinColumn(name = "BUILDING_ID")
 	private List<Dwelling> dwellingList;
 	
-	//private List<Worker> worker;
+    @ManyToOne
+    @JoinColumn(name = "AREA_ID")
+    private Area area;
+	
+    /** Getter und Setter **/
 	
 	public Long getId() {
 		return id;
@@ -62,5 +67,11 @@ public class Building implements Serializable{
 	public List<Dwelling> getDwellingList() {
 		return dwellingList;
 	}
+
+	public Area getArea() {
+		return area;
+	}
+	
+	
 
 }

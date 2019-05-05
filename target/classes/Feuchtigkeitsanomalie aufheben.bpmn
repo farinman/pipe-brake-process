@@ -74,7 +74,7 @@ arduinoName: String</bpmn:documentation>
       <bpmn:outgoing>SequenceFlow_1ip7m4v</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1qol59i</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Task_10nf5r8" name="Zuständige FM-MA kontaktieren" camunda:delegateExpression="${sendMailToWorkerAdapter}">
+    <bpmn:serviceTask id="Task_10nf5r8" name="Zuständige FM-MA finden" camunda:delegateExpression="${getWorkersInAreaAdapter}">
       <bpmn:incoming>SequenceFlow_1ip7m4v</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_163jkoc</bpmn:outgoing>
     </bpmn:serviceTask>
