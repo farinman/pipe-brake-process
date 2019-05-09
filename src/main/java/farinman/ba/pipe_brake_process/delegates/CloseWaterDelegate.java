@@ -30,7 +30,7 @@ public class CloseWaterDelegate implements JavaDelegate{
 		
 		Device device = (Device) execution.getVariable("device");
 		String deviceId = device.getId();
-		String action = "blinkGreen";
+		String action = "closeWater";
 		String accessToken = "a1041533a33b1618277a3e4f4bb0532aa95b3498";
 		final String url = "https://api.particle.io/v1/devices/"+deviceId+"/"+action+"?access_token="+accessToken;
 		//final String url = "https://api.particle.io/v1/devices/{deviceId}/{action}/?acces_token={accesToken}";
