@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.h2.engine.SysProperties;
 
 import farinman.ba.pipe_brake_process.entities.Area;
 import farinman.ba.pipe_brake_process.entities.Building;
@@ -61,8 +62,11 @@ public class ContactWorkersInAreaDelegate extends SendMailHelper implements Java
 			text += "-------Kontaktperson-------\n\n";
 			text += "Name: "+person.getName()+" \n";
 			text += "Nachname: "+person.getLastname()+" \n";
-
+			
 			sendSimpleMessage(worker.getMail(), subject, text, from);
+			System.out.println(text);
+			device.setAlreadyInformed(true);
+
 		}
 	}
 }

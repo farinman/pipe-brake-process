@@ -15,28 +15,27 @@ import farinman.ba.pipe_brake_process.entities.Dwelling;
 import farinman.ba.pipe_brake_process.entities.Person;
 import farinman.ba.pipe_brake_process.helpers.SendMailHelper;
 
-@Named("sendSpecialistRequestToTicketSystemAdapter")
-public class SendSpecialistRequestToTicketSystemDelegate extends SendMailHelper implements JavaDelegate{
+@Named("sendWarningToTicketSystemAdapter")
+public class SendWarningToTicketSystemDelegate extends SendMailHelper implements JavaDelegate{
 
-
-	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
 		Building building = (Building)execution.getVariable("building");
 		Area area = building.getArea();
-		String subject = "Ticket: Feuchtigkeits-Anomalie - "+building.getStreet()+" "+building.getBuildingNumber();
+		String subject = "Ticket: Warnung Wasseranschluss nicht geschlossen - "+building.getStreet()+" "+building.getBuildingNumber();
 		Device device = (Device) execution.getVariable("device");
 		Dwelling dwelling = (Dwelling) execution.getVariable("dwelling");
 		List<Person> personList = dwelling.getPersons();
 		Optional<Person> personPrincipalTenantOptional = personList.stream().filter(p -> p.isPrincipalTenant()).findFirst();
 		Person person = personPrincipalTenantOptional.get();
+		System.out.println(person.getLastname());
 		String from = (String) execution.getVariable("sentFrom");
 		String to = (String) execution.getVariable("ticketSystemMail");
 		String text = "";
 		
-		text += "Hallo ";
-		text += "Es wurde eine Feuchtugkeits-Anomalie wahrgenommen.\n\n";
+		text += "Hallo \n";
+		text += "Der Wasseranschluss wurde nicht geschlossen!\n\n";
 		text += "----------Gebäude----------\n\n";
 		text += "Strasse: "+building.getStreet()+" "+building.getBuildingNumber()+"\n";
 		text += "Ort / PLZ: "+building.getPlace()+" "+building.getPostCode()+"\n\n";
@@ -52,7 +51,7 @@ public class SendSpecialistRequestToTicketSystemDelegate extends SendMailHelper 
 
 		sendSimpleMessage(to, subject, text, from);
 		device.setAlreadyInformed(true);
-		System.out.println(text);
 		
 	}
+
 }

@@ -8,28 +8,17 @@
         </inputExpression>
       </input>
       <input id="InputClause_1hrfnny">
-        <inputExpression id="LiteralExpression_1aeedph" typeRef="double">
-          <text>humidity</text>
+        <inputExpression id="LiteralExpression_1aeedph" typeRef="integer">
+          <text>device.warningCounter</text>
         </inputExpression>
       </input>
       <output id="output_1" typeRef="string" />
-      <rule id="DecisionRule_0qhw66o">
-        <inputEntry id="UnaryTests_1ol749n">
-          <text>[1..3]</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0srwvu2">
-          <text>[0..65]</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_08991w3">
-          <text>"ok"</text>
-        </outputEntry>
-      </rule>
       <rule id="DecisionRule_1x3yrqy">
         <inputEntry id="UnaryTests_18u1402">
-          <text>[4..6]</text>
+          <text>1</text>
         </inputEntry>
         <inputEntry id="UnaryTests_04pk5oo">
-          <text>&gt;= 65</text>
+          <text>10</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0u0dqjz">
           <text>"closeWater"</text>
@@ -37,10 +26,10 @@
       </rule>
       <rule id="DecisionRule_19al03o">
         <inputEntry id="UnaryTests_1f6n7pa">
-          <text>1</text>
+          <text>2</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0jjlh2v">
-          <text>&gt;= 95</text>
+          <text>9</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1qqfyhd">
           <text>"closeWater"</text>
@@ -48,10 +37,10 @@
       </rule>
       <rule id="DecisionRule_1co65ko">
         <inputEntry id="UnaryTests_0z97zrs">
-          <text>2</text>
+          <text>3</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0sifhmq">
-          <text>&gt;= 85</text>
+          <text>8</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1fa3o6e">
           <text>"closeWater"</text>
@@ -59,13 +48,101 @@
       </rule>
       <rule id="DecisionRule_00xt6w3">
         <inputEntry id="UnaryTests_14buiah">
-          <text>3</text>
+          <text>4</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1rt7h3u">
-          <text>&gt;= 75</text>
+          <text>7</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0mj6zlp">
-          <text></text>
+          <text>"closeWater"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1un5lwc">
+        <inputEntry id="UnaryTests_1t8jnjm">
+          <text>5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10bs32u">
+          <text>6</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gozk3s">
+          <text>"closeWater"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0hj3yu7">
+        <inputEntry id="UnaryTests_1s7ewfe">
+          <text>6</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sjwlni">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0l7lll3">
+          <text>"closeWater"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1llu1zo">
+        <inputEntry id="UnaryTests_17c2pss">
+          <text>6</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zczs8x">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07h5tu8">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15bofpv">
+        <inputEntry id="UnaryTests_06aekpy">
+          <text>5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bwtnht">
+          <text>[1..5]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0e2l8y7">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yw82xo">
+        <inputEntry id="UnaryTests_0k5znt1">
+          <text>4</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16kzbaj">
+          <text>[1..6]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0suz1o1">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wx0apo">
+        <inputEntry id="UnaryTests_0s4lnpt">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lg220n">
+          <text>[1..7]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0j6z90z">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00fcokt">
+        <inputEntry id="UnaryTests_0tysfz1">
+          <text>2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g245rd">
+          <text>[1..8]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uj0nrl">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1q4bbpz">
+        <inputEntry id="UnaryTests_1g6rhql">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08nrbmf">
+          <text>[1..9]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19vi5ft">
+          <text>"ok"</text>
         </outputEntry>
       </rule>
     </decisionTable>

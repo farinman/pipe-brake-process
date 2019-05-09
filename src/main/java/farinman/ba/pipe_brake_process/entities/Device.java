@@ -18,7 +18,14 @@ public class Device implements Serializable{
     private Dwelling dwelling;
     
     private String locationInDwelling;
-
+    
+    private Boolean alreadyInformed;
+    
+    private int warningCounter;
+    
+    private Boolean waterClosed;
+    
+    
 	public String getId() {
 		return id;
 	}
@@ -35,4 +42,29 @@ public class Device implements Serializable{
 		return locationInDwelling;
 	}
 
+	public Boolean getAlreadyInformed() {
+		return alreadyInformed;
+	}
+
+	public void setAlreadyInformed(Boolean alreadyInformed) {
+		this.alreadyInformed = alreadyInformed;
+	}
+
+	public int getWarningCounter() {
+		return warningCounter;
+	}
+
+	public void setWarningCounter(int warningCounter) {
+		this.warningCounter = warningCounter;
+	}
+
+	public Boolean getWaterClosed() {
+		return waterClosed;
+	}
+
+	public void setWaterClosed(Boolean waterClosed) {
+		this.waterClosed = waterClosed;
+	}
+	
+	
 }
