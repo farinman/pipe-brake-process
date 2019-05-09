@@ -41,10 +41,9 @@ public class CloseWaterDelegate implements JavaDelegate{
 	    RestTemplate restTemplate = new RestTemplate();
 	    
 	    ResponseEntity<String> s = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-	    //System.out.println(s.getBody().toString());
-	    TimeUnit.SECONDS.sleep(10);
+	    TimeUnit.SECONDS.sleep(32);
 	    if(s.getStatusCode() == HttpStatus.OK) {
-	    	device.setWaterClosed(false);
+	    	device.setWaterClosed(true);
 	    }
 	    
 	    deviceRepository.saveAndFlush(device);

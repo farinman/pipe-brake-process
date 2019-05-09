@@ -53,7 +53,6 @@ arduinoName: String</bpmn:documentation>
       <bpmn:lane id="Lane_01xcbgc" name="WFMS">
         <bpmn:flowNodeRef>Task_10nf5r8</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0rh19ch</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>endOfProcess1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0ysh6kz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0s1h1y3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>contactSpecialistOrFmworker</bpmn:flowNodeRef>
@@ -68,6 +67,7 @@ arduinoName: String</bpmn:documentation>
         <bpmn:flowNodeRef>ExclusiveGateway_1c9n0a2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_00pu4e8</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_194m2rs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>endOfProcess1</bpmn:flowNodeRef>
         <bpmn:childLaneSet id="LaneSet_055334l">
           <bpmn:lane id="Lane_0xiwdzx" name="Controller">
             <bpmn:flowNodeRef>Task_10nf5r8</bpmn:flowNodeRef>
@@ -81,9 +81,9 @@ arduinoName: String</bpmn:documentation>
             <bpmn:flowNodeRef>Task_113rykk</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>ExclusiveGateway_1c9n0a2</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>EndEvent_00pu4e8</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>endOfProcess1</bpmn:flowNodeRef>
           </bpmn:lane>
           <bpmn:lane id="Lane_05wzx5v" name="Camunda">
-            <bpmn:flowNodeRef>endOfProcess1</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Task_0s1h1y3</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>closeWater</bpmn:flowNodeRef>
@@ -103,9 +103,6 @@ arduinoName: String</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_1qol59i</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_13h94eh</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:endEvent id="endOfProcess1">
-      <bpmn:incoming>SequenceFlow_00p700m</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1ip7m4v" sourceRef="contactSpecialistOrFmworker" targetRef="Task_10nf5r8">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${activity == "MF-MA"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -205,6 +202,9 @@ arduinoName: String</bpmn:documentation>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_194m2rs">
       <bpmn:incoming>SequenceFlow_1juc3hf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endOfProcess1">
+      <bpmn:incoming>SequenceFlow_00p700m</bpmn:incoming>
     </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_193hlgk" name="Message_2s1m8of" />
@@ -314,7 +314,7 @@ arduinoName: String</bpmn:documentation>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_05vh8gd_di" bpmnElement="endOfProcess1">
-        <dc:Bounds x="1800" y="981" width="36" height="36" />
+        <dc:Bounds x="1800" y="789" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1m4k68u_di" bpmnElement="SequenceFlow_1m4k68u">
         <di:waypoint x="1513" y="807" />
@@ -389,8 +389,7 @@ arduinoName: String</bpmn:documentation>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_00p700m_di" bpmnElement="SequenceFlow_00p700m">
         <di:waypoint x="1621" y="807" />
-        <di:waypoint x="1818" y="807" />
-        <di:waypoint x="1818" y="981" />
+        <di:waypoint x="1800" y="807" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0doi3k5_di" bpmnElement="SequenceFlow_0doi3k5">
         <di:waypoint x="1596" y="782" />

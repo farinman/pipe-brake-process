@@ -25,7 +25,7 @@ const int buttonPin = D5;
 const int ledPin =  D7;
 const int buzzer = D0;
 
-const int stepsPerRevolution = 2038;  // number of steps of the stepper motor 28BYJ-48
+const int stepsPerRevolution = 4076;  // number of steps of the stepper motor 28BYJ-48
 // define the stepper motor pins
 Stepper stepper(stepsPerRevolution, D4, D3, D2, D1);
 
@@ -275,67 +275,34 @@ int alarmSound(){
 }
 // Cloud functions must return int and take one String
 int closeWater(String command) {
-   /* if(degrees != 0){
-      // recalibration of the stepper motor
-      int steps = 360 - degrees * oneDegree;
-      Particle.publish("waterStreamStateChanged", "water is closed");
-      stepper.setSpeed(1); // 1 rpm
-      stepper.step(steps);
-    }else{
-      // publish an event when blinking starts
-      Particle.publish("waterStreamStateChanged", "water is closed");
-      stepper.setSpeed(1); // 1 rpm
-      stepper.step(1019); // do 2038 steps -- corresponds to one revolution in one minute
-
-      // blink red for 3000 ms
-    }*/
-        int steps = 0;
-      do{
-
+    int steps = 0;
+    do{
         stepper.setSpeed(1); // 1 rpm
         stepper.step(1);
         ++steps;
-      }while (steps<1019);
-      // publish an event when water stream gets opened
-      Particle.publish("waterStreamStateChanged", "water is open");
+    }while (steps<1019);
+    // publish an event when water stream gets opened
+    Particle.publish("waterStreamStateChanged", "water is closed");
     RGB.color(255, 0, 0);
-    degrees = 1019 * oneDegree;
+    delay(3000);
+    RGB.color(0, 0, 0);
     return 0;
 }
 
 // Cloud functions must return int and take one String
 int openWater(String command) {
-    //int steps = 1019;
-    /*if(degrees != 180){
-      // recalibration of the stepper motor
-      int degreesDifference = 360 - degrees;
-      if(degreesDifference * oneDegree > 180){
-        steps = 360 - degreesDifference * oneDegree;
-      }else{
-        steps = 360 - degreesDifference * oneDegree;
-      }
-      /*Particle.publish("waterStreamStateChanged", "water is closed");
-      stepper.setSpeed(1); // 1 rpm
-      stepper.step(steps);*/
-
-      /*degrees = 1019 / oneDegree;
-    }else{*/
     int steps = 0;
-      do{
+    do{
 
-        stepper.setSpeed(1); // 1 rpm
-        stepper.step(1);
-        ++steps;
-      }while (steps<1019);
-      // publish an event when water stream gets opened
-      Particle.publish("waterStreamStateChanged", "water is open");
-      RGB.color(0, 0, 255);
-      /*stepper.setSpeed(1); // 1 rpm
-      stepper.step(1019); // do 1019 steps -- corresponds to one revolution in one minute*/
-
-
-
-
+      stepper.setSpeed(1); // 1 rpm
+      stepper.step(1);
+      ++steps;
+    }while (steps<1019);
+    // publish an event when water stream gets opened
+    Particle.publish("waterStreamStateChanged", "water is open");
+    RGB.color(0, 0, 255);
+    delay(3000);
+    RGB.color(0, 0, 0);
     // publish an event when blinking stops
     Particle.publish("blinkingStateChanged", "stopped blinking");
 
