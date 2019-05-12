@@ -335,14 +335,14 @@ arduinoName: String</bpmn:documentation>
         <dc:Bounds x="1351" y="635" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1hyvntw_di" bpmnElement="Participant_1hyvntw">
-        <dc:Bounds x="823" y="251" width="609" height="84" />
+        <dc:Bounds x="1099" y="243" width="609" height="84" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SendTask_1naisqh_di" bpmnElement="Task_0rh19ch">
         <dc:Bounds x="1354" y="518" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_1f37mr9_di" bpmnElement="MessageFlow_1f37mr9">
         <di:waypoint x="1404" y="518" />
-        <di:waypoint x="1404" y="335" />
+        <di:waypoint x="1404" y="327" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0u5n2hy_di" bpmnElement="SequenceFlow_0u5n2hy">
         <di:waypoint x="405" y="674" />

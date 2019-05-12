@@ -16,7 +16,6 @@
 int count = 0;
 int msgId = 0;
 char telemetryBuffer[256];
-#define FAN_PIN D2
 
 // define the pin for the button
 const int buttonPin = D5;
@@ -25,12 +24,15 @@ const int buttonPin = D5;
 const int ledPin =  D7;
 const int buzzer = D0;
 
-const int stepsPerRevolution = 4076;  // number of steps of the stepper motor 28BYJ-48
+//const int stepsPerRevolution = 4076;  // number of steps of the stepper motor 28BYJ-48
 // define the stepper motor pins
-Stepper stepper(stepsPerRevolution, D4, D3, D2, D1);
-
+//Stepper stepper(stepsPerRevolution, D4, D3, D2, D1);
+const int waterStreamOpen = 0;
+const int waterStreamClosed = 360;
+Servo myservo;// create servo object using the built-in Particle Servo Library
+const int servoPin = D2;  //declare variable for servo
 //define stepper position
-int degrees = 0;
+//int degrees = 0;
 //define one degree in steps
 const float oneDegree= 5.661111111111111;
 
@@ -60,11 +62,12 @@ void setup()
 {
   WiFi.selectAntenna(ANT_INTERNAL);
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(FAN_PIN, OUTPUT);
-  digitalWrite(FAN_PIN, HIGH);
   RGB.control(true);
   Time.zone(0);
-
+  myservo.attach(servoPin);  //Initialize the servo attached to pin D0
+  myservo.write(0);        //set servo to furthest position
+  delay(500);                //delay to give the servo time to move to its position
+  //myservo.detach();          //detach the servo to prevent it from jittering
       // set the pin mode for the button
     pinMode(buttonPin, INPUT_PULLDOWN);
 
@@ -102,7 +105,7 @@ void loop()
 
   delay(20); // allow for a short blink before turning led off
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(180);
+  delay(200);
 
     // read the current state of the button:
     // HIGH: button is pressed
@@ -171,19 +174,6 @@ int callbackDirectMethod(char *method, byte *payload, unsigned int payloadLength
   else if (strcmp(method, "lightoff") == 0)
   {
     RGB.color(0, 0, 0);
-  }
-  else if (strcmp(method, "fanon") == 0)
-  {
-    int speed = jsonGetValue(payload, payloadLength, "speed");
-    if (speed == -1) {return 500;}
-    // input between 0 and 100, inverted, and scale pwm between 0 and 255 duty cycle
-    speed = 100 - constrain(speed, 0, 100);
-    speed = map(speed, 0, 100, 0, 255);
-    analogWrite(FAN_PIN, speed, 1000);
-  }
-  else if (strcmp(method, "fanoff") == 0)
-  {
-    digitalWrite(FAN_PIN, HIGH);
   }
   else
   {
@@ -275,13 +265,16 @@ int alarmSound(){
 }
 // Cloud functions must return int and take one String
 int closeWater(String command) {
-    int steps = 0;
-    do{
+    //int steps = 0;
+    /*do{
         stepper.setSpeed(1); // 1 rpm
         stepper.step(1);
         ++steps;
-    }while (steps<1019);
+    }while (steps<1019);*/
     // publish an event when water stream gets opened
+    myservo.attach(servoPin);
+    myservo.write(waterStreamClosed);
+    delay(500);
     Particle.publish("waterStreamStateChanged", "water is closed");
     RGB.color(255, 0, 0);
     delay(3000);
@@ -291,14 +284,17 @@ int closeWater(String command) {
 
 // Cloud functions must return int and take one String
 int openWater(String command) {
-    int steps = 0;
-    do{
+    //int steps = 0;
+    /**do{
 
       stepper.setSpeed(1); // 1 rpm
       stepper.step(1);
       ++steps;
-    }while (steps<1019);
+    }while (steps<1019);*/
     // publish an event when water stream gets opened
+    myservo.attach(servoPin);
+    myservo.write(waterStreamOpen);
+    delay(500);
     Particle.publish("waterStreamStateChanged", "water is open");
     RGB.color(0, 0, 255);
     delay(3000);
