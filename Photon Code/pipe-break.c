@@ -24,17 +24,12 @@ const int buttonPin = D5;
 const int ledPin =  D7;
 const int buzzer = D0;
 
-//const int stepsPerRevolution = 4076;  // number of steps of the stepper motor 28BYJ-48
-// define the stepper motor pins
-//Stepper stepper(stepsPerRevolution, D4, D3, D2, D1);
+//set position for open open water stream
 const int waterStreamOpen = 0;
-const int waterStreamClosed = 360;
+//set servo motor position for closed water stram
+const int waterStreamClosed = 180;
 Servo myservo;// create servo object using the built-in Particle Servo Library
 const int servoPin = D2;  //declare variable for servo
-//define stepper position
-//int degrees = 0;
-//define one degree in steps
-const float oneDegree= 5.661111111111111;
 
 // the state of the push button.
 int defaultButtonState = 0;
@@ -216,7 +211,7 @@ void toLowerCase(char* s, size_t length){
 // Cloud functions must return int and take one String
 int blinkGreen(String command) {
 
-        // publish an event when blinking starts
+    // publish an event when blinking starts
     Particle.publish("blinkingStateChanged", "started blinking");
 
     // blink red for 3000 ms
@@ -228,19 +223,12 @@ int blinkGreen(String command) {
     Particle.publish("blinkingStateChanged", "stopped blinking");
     Serial.printf("msg id: %d\n", msgId);
     alarmSound();
-    //(tone(buzzer, 2400);
-    /*for (int i = 0; i < 5; i++) {
-       //alarmSound();
-       delay(1000);
-    }*/
-
-
     return 0;
 }
 
-
+//Alarm sound
 int alarmSound(){
-        // Sounds the buzzer at the frequency relative to the note C in Hz
+    // Sounds the buzzer at the frequency relative to the note C in Hz
     tone(buzzer,261);
     // Waits some time to turn off
     delay(200);
@@ -263,14 +251,8 @@ int alarmSound(){
     delay(200);
     noTone(buzzer);
 }
-// Cloud functions must return int and take one String
+// This function closes the water stream
 int closeWater(String command) {
-    //int steps = 0;
-    /*do{
-        stepper.setSpeed(1); // 1 rpm
-        stepper.step(1);
-        ++steps;
-    }while (steps<1019);*/
     // publish an event when water stream gets opened
     myservo.attach(servoPin);
     myservo.write(waterStreamClosed);
@@ -282,15 +264,8 @@ int closeWater(String command) {
     return 0;
 }
 
-// Cloud functions must return int and take one String
+// This function opens the water stream
 int openWater(String command) {
-    //int steps = 0;
-    /**do{
-
-      stepper.setSpeed(1); // 1 rpm
-      stepper.step(1);
-      ++steps;
-    }while (steps<1019);*/
     // publish an event when water stream gets opened
     myservo.attach(servoPin);
     myservo.write(waterStreamOpen);
@@ -315,8 +290,6 @@ char *buttonPressedTelemetryToJson(){
 
   root["deviceid"] = hub.getDeviceId();
   root["buttonStateChanged"] = "TRUE";
-
-  root["geo"] = "Sydney";
   root["utc"] = Time.format(Time.now(), TIME_FORMAT_ISO8601_FULL).c_str();
   root["mem"] = System.freeMemory();
   root["id"] = ++msgId;
@@ -338,20 +311,8 @@ char *telemetryToJson()
   JsonObject root = jsonBuffer.to<JsonObject>();
 
   root["deviceid"] = hub.getDeviceId();
-
-  root["temp"] = 20 + random(-3, 3); // random temperature for sample
   root["humidity"] = 70 + random(-20, 20);
   root["pressure"] = 1080 + random(-100, 100);
-  root["light"] = 50 + random(-50, 50);
-
-  // switch the led on if the button is pressed
-    if (buttonState == HIGH) {
-        root["button"] = 1;
-        digitalWrite(ledPin, HIGH);
-    } else {
-        root["button"] = 0;
-        digitalWrite(ledPin, LOW);
-    }
   root["geo"] = "Sydney";
   root["utc"] = Time.format(Time.now(), TIME_FORMAT_ISO8601_FULL).c_str();
   root["mem"] = System.freeMemory();
