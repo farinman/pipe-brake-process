@@ -73,7 +73,7 @@
           <text>6</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1sjwlni">
-          <text>2</text>
+          <text>5</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0l7lll3">
           <text>"closeWater"</text>
@@ -84,7 +84,7 @@
           <text>6</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0zczs8x">
-          <text>1</text>
+          <text>[1..2]</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_07h5tu8">
           <text>"ok"</text>
