@@ -17,9 +17,6 @@
 
 ## Photon mit Azure IoT Central verbinden
 1. Tutorial folgen und den Code in [pipe-break.c](/Photon%20Code/pipe-break.c) verwenden für Photon -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://github.com/gloveboxes/Connecting-Particle-Photon-to-Azure-IoT-Hub)
-2. Auf Azure IoT Central
-3. 
-
 
 ## Photon Template erstellen
 1. Anhand folgendem Tutorial Template erstellen -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://docs.microsoft.com/en-us/azure/iot-central/howto-set-up-template)
