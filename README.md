@@ -20,7 +20,7 @@
 1. Tutorial folgen und den Code in [pipe-break.c](/Photon%20Code/pipe-break.c) verwenden für Photon -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://github.com/gloveboxes/Connecting-Particle-Photon-to-Azure-IoT-Hub)
 
 ## Photon Template erstellen
-1. Anhand folgendem Tutorial Template erstellen -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://docs.microsoft.com/en-us/azure/iot-central/howto-set-up-template)
+1. Anhand folgendem Tutorial Template erstellen -> [Template Tutorial](https://docs.microsoft.com/en-us/azure/iot-central/howto-set-up-template)
 2. Unter Measurements Event hinzufügen mit "Field Name" waterSensorStateChanged.
 3. Unter Rules eine neue Regel hinzufügen
 4. Action auswählen und dann Microsoft Flow
