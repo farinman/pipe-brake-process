@@ -32,7 +32,7 @@ public class GetDataDelegate implements JavaDelegate{
 	 */
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		System.out.println("Get device data!!!");
+		
 		
 		Device device = new Device();
 		Dwelling dwelling = new Dwelling();
