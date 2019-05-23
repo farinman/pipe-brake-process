@@ -9,71 +9,62 @@
 - Azure IoT Central vorbereite
 - Maven
 
+## Der Prozess kann zum Beispiel auf Heorku oder auf dem eigenen PC deployed werden. Beim eigenen PC muss man den Richtigen Port freigeben.
+
+## Photon zusammen bauen
+1. Im folgenden Code [pipe-break.c](/Photon%20Code/pipe-break.c) werden die Pins für die IoT-Komponenten beschrieben
+2. Sobald gemacht, Photon starten
+
 ## Photon mit Azure IoT Central verbinden
-1. Tutorial folgend und den Code in [pipe-break.c](/Photon%20Code/pipe-break.c) verwenden zum -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://github.com/gloveboxes/Connecting-Particle-Photon-to-Azure-IoT-Hubm)
+1. Tutorial folgen und den Code in [pipe-break.c](/Photon%20Code/pipe-break.c) verwenden für Photon -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://github.com/gloveboxes/Connecting-Particle-Photon-to-Azure-IoT-Hub)
+2. Auf Azure IoT Central
+3. 
 
 
-
-## Show me the important parts!
-[BPMN Process](src/main/resources/process.bpmn)
-
-![BPMN Process](src/main/resources/process.png)
-
-## How does it work?
-
-## How to use it?
-
-### Unit Test
-You can run the JUnit test [InMemoryH2Test](src/main/resources/archetype-resources/src/test/java/ProcessTest.java) in your IDE or using:
-```bash
-mvn clean test
+## Photon Template erstellen
+1. Anhand folgendem Tutorial Template erstellen -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://docs.microsoft.com/en-us/azure/iot-central/howto-set-up-template)
+2. Unter Measurements Event hinzufügen mit "Field Name" waterSensorStateChanged.
+3. Unter Rules eine neue Regel hinzufügen
+4. Action auswählen und dann Microsoft Flow
+5. Dort ein Workflow erstellen der ausgeführt wird, wenn die Regel eintritt
+6. Als nächstes muss ein neuer HTTP-Schritt hinzugefügt werden
+7. Im URI feld muss die Adresse für die Camunda API mit den Prozess angaben eingetragen werden.
+8. Im Body muss folgerndes sein: 
+```json
+{
+  "variables": {
+    "deviceId": {
+      "value": "@{triggerBody()['device']['name']}<---das ist eine dynamische Variable von Microsoft Flow",
+      "type": "String"
+    },
+    "ticketSystemMail": {
+      "value": "fm3@boullosa.ch",
+      "type": "String"
+    },
+    "sentFrom": {
+      "value": "task@boullosa.ch",
+      "type": "String"
+    }
+  },
+  "startInstructions": [
+    {
+      "type": "startBeforeActivity",
+      "activityId": "StartEvent_1"
+    }
+  ],
+  "businessKey": ""
+}
 ```
 
-### Running the application
-You can also build and run the process application with Spring Boot.
+## Photon-Gerät in Azure IoT Central hinzufügen
+1. Hier wieder folgnder Tutorial beachten -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://github.com/gloveboxes/Connecting-Particle-Photon-to-Azure-IoT-Hub)
+2. Darauf beachten, dass der Name des Gerätes die ID von Particle hat.
 
-#### Manually
-1. Build the application using:
-```bash
-mvn clean package
-```
-2. Run the *.jar file from the `target` directory using:
-```bash
-java -jar target/Camunda Spring Boot Application.jar
-```
+## Testen
+1. unter src/main/resources/data.sql den verwendeten Device hinzufügen oder einer der Anderen bearbeiten
+2. In der CloseWaterDelegate-Klase den AccessToken mit dem auf dem Particle-Account austauschen
+3. Applikation starten
+4. Testen :)
 
-For a faster 1-click (re-)deployment see the alternatives below.
-
-#### Maven Spring Boot Plugin
-1. Build and deploy the process application using:
-```bash
-mvn clean package spring-boot:run
-```
-
-#### Your Java IDE
-1. Run the project as a Java application in your IDE using CamundaApplication as the main class.
-
-### Run and Inspect with Tasklist and Cockpit
-Once you deployed the application you can run it using
-[Camunda Tasklist](http://docs.camunda.org/latest/guides/user-guide/#tasklist)
-and inspect it using
-[Camunda Cockpit](http://docs.camunda.org/latest/guides/user-guide/#cockpit).
-
-## Environment Restrictions
-Built and tested against Camunda BPM version 7.10.0.
-
-## Known Limitations
-
-## License
-[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-<!-- HTML snippet for index page
-  <tr>
-    <td><img src="snippets/pipe-brake-process/src/main/resources/process.png" width="100"></td>
-    <td><a href="snippets/pipe-brake-process">Camunda Spring Boot Application</a></td>
-    <td>Spring Boot Application using [Camunda](http://docs.camunda.org).</td>
-  </tr>
--->
-<!-- Tweet
-New @Camunda example: Camunda Spring Boot Application - Spring Boot Application using [Camunda](http://docs.camunda.org). https://github.com/camunda-consulting/code/tree/master/snippets/pipe-brake-process
--->
+## Bei Fragen 
+Mich kontaktieren.
