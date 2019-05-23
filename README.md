@@ -26,7 +26,7 @@
 4. Action auswählen und dann Microsoft Flow
 5. Dort ein Workflow erstellen der ausgeführt wird, wenn die Regel eintritt
 6. Als nächstes muss ein neuer HTTP-Schritt hinzugefügt werden
-7. Im URI feld muss die Adresse für die Camunda API mit den Prozess angaben eingetragen werden.
+7. Im URI-Feld muss die Adresse für die Camunda API mit den Prozess angaben eingetragen werden.
 8. Im Body muss folgerndes sein: 
 ```json
 {
