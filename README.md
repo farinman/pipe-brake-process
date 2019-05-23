@@ -55,7 +55,7 @@
 ```
 
 ## Photon-Gerät in Azure IoT Central hinzufügen
-1. Hier wieder folgnder Tutorial beachten -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://github.com/gloveboxes/Connecting-Particle-Photon-to-Azure-IoT-Hub)
+1. Hier wieder folgender Tutorial beachten -> [Connect your Particle Photon Directly to Azure IoT Hub or IoT Central](https://github.com/gloveboxes/Connecting-Particle-Photon-to-Azure-IoT-Hub)
 2. Darauf beachten, dass der Name des Gerätes die ID von Particle hat.
 
 ## Testen
