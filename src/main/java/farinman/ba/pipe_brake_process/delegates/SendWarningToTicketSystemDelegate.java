@@ -15,9 +15,21 @@ import farinman.ba.pipe_brake_process.entities.Dwelling;
 import farinman.ba.pipe_brake_process.entities.Person;
 import farinman.ba.pipe_brake_process.helpers.SendMailHelper;
 
+/**
+ * Die Klasse SendWarningToTicketSystemDelegate wird aufgerufen, wenn der Wasserstopp nicht erreicht wurde.
+ * Dabei wird eine eine Mail generiert, welche ein Ticket auf dem Ticketsystem eröffnet, damit sofort ein FM-MA kontaktiert wird.
+ * Im Text werden die Daten des Hauptmieters, Gebäude, Gerät und Wohnung geschrieben.
+ * Die Nachricht wird mit der Helper-Klasse "SendMailHelper" an die Mail des Ticketsystems gesendet.
+ */
 @Named("sendWarningToTicketSystemAdapter")
 public class SendWarningToTicketSystemDelegate extends SendMailHelper implements JavaDelegate{
 
+	/**
+	 * Execute.
+	 *
+	 * @param execution the execution
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		

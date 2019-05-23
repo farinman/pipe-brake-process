@@ -13,12 +13,23 @@ import farinman.ba.pipe_brake_process.entities.Device;
 import farinman.ba.pipe_brake_process.entities.Dwelling;
 import farinman.ba.pipe_brake_process.repositories.DeviceRepository;
 
+
+/**
+ * Die Klasse GetDataDelegate ermittelt alle Daten die für den Prozess nötig sind und instanziert sie als Prozessvariablen.
+ */
 @Named("getDataAdapter")
 public class GetDataDelegate implements JavaDelegate{
 
+	/** The device repository. */
 	@Autowired
 	DeviceRepository deviceRepository;
 	
+	/**
+	 * Execute.
+	 *
+	 * @param execution the execution
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		System.out.println("Get device data!!!");

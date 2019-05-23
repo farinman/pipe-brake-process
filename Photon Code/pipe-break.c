@@ -17,8 +17,8 @@ int count = 0;
 int msgId = 0;
 char telemetryBuffer[256];
 
-// define the pin for the button
-const int buttonPin = D5;
+// define the pin for the waterSensor
+const int waterSensorPin = D5;
 
 // define the pin for the led. (D7 is the PIN that is coupled with the on-board LED)
 const int ledPin =  D7;
@@ -31,9 +31,9 @@ const int waterStreamClosed = 180;
 Servo myservo;// create servo object using the built-in Particle Servo Library
 const int servoPin = D2;  //declare variable for servo
 
-// the state of the push button.
-int defaultButtonState = 0;
-int buttonState = defaultButtonState;
+// the state of the push waterSensor.
+int defaultWaterSensorState = 0;
+int waterSensorState = defaultWaterSensorState;
 
 // defining and using a LED status
 LEDStatus status2(RGB_COLOR_GREEN, LED_PATTERN_BLINK);
@@ -63,8 +63,8 @@ void setup()
   myservo.write(0);        //set servo to furthest position
   delay(500);                //delay to give the servo time to move to its position
   //myservo.detach();          //detach the servo to prevent it from jittering
-      // set the pin mode for the button
-    pinMode(buttonPin, INPUT_PULLDOWN);
+      // set the pin mode for the waterSensor
+    pinMode(waterSensorPin, INPUT_PULLDOWN);
 
     // set the pin mode for the LED
     pinMode(ledPin, OUTPUT);
@@ -73,8 +73,8 @@ void setup()
     pinMode(buzzer, OUTPUT);
 
 
-    // register the  cloud variable "buttonState"
-    Particle.variable("buttonState", buttonState);
+    // register the  cloud variable "waterSensorState"
+    Particle.variable("waterSensorState", waterSensorState);
 
     // register the cloud function
     Particle.function("blinkGreen", blinkGreen);
@@ -102,32 +102,31 @@ void loop()
   digitalWrite(LED_BUILTIN, HIGH);
   delay(200);
 
-    // read the current state of the button:
-    // HIGH: button is pressed
-    // LOW: button is not pressed
-    buttonState = digitalRead(buttonPin);
+    // read the current state of the waterSensor:
+    // HIGH: waterSensor sensed water
+    // LOW: waterSensor sensed no water
+    waterSensorState = digitalRead(waterSensorPin);
 
-    // switch the led on if the button is pressed
-    if (buttonState == HIGH) {
+    // switch the led on if the waterSensor is pressed
+    if (waterSensorState == HIGH) {
         // turn the led on
         digitalWrite(ledPin, HIGH);
-        digitalWrite(buzzer, HIGH);
         blinkGreen("blinkGreen");
-        Particle.publish("buttonState", "1");
-        // publish an event if the button was not pressed before
-        if (buttonState != defaultButtonState) {
-            Particle.publish("buttonStateChanged", "TRUE");
-            hub.publish(buttonPressedTelemetryToJson());
+        Particle.publish("waterSensorState", "1");
+        // publish an event if the waterSensor sensed water
+        if (waterSensorState != defaultWaterSensorState) {
+            Particle.publish("waterSensorStateChanged", "TRUE");
+            hub.publish(waterSensorPressedTelemetryToJson());
         }
 
     } else {
         // turn the led off
         digitalWrite(ledPin, LOW);
         digitalWrite(buzzer, LOW);
-        Particle.publish("buttonState", "0");
-        // publish an event if the button was not released before
-        if (buttonState == defaultButtonState) {
-            //Particle.publish("buttonStateChanged", "FALSE");
+        Particle.publish("waterSensorState", "0");
+        // publish an event if the waterSensor didn't sense water
+        if (waterSensorState == defaultWaterSensorState) {
+            //Particle.publish("waterSensorStateChanged", "FALSE");
 
         }
     }
@@ -222,7 +221,6 @@ int blinkGreen(String command) {
     // publish an event when blinking stops
     Particle.publish("blinkingStateChanged", "stopped blinking");
     Serial.printf("msg id: %d\n", msgId);
-    alarmSound();
     return 0;
 }
 
@@ -257,6 +255,7 @@ int closeWater(String command) {
     myservo.attach(servoPin);
     myservo.write(waterStreamClosed);
     delay(500);
+    alarmSound();
     Particle.publish("waterStreamStateChanged", "water is closed");
     RGB.color(255, 0, 0);
     delay(3000);
@@ -280,7 +279,7 @@ int openWater(String command) {
     return 0;
 }
 
-char *buttonPressedTelemetryToJson(){
+char *waterSensorPressedTelemetryToJson(){
   /*  https://arduinojson.org/
     use to calculate JSON_OBJECT_SIZE https://arduinojson.org/v5/assistant/
     Have allowed for a few extra json fields that actually being used at the moment
@@ -289,7 +288,7 @@ char *buttonPressedTelemetryToJson(){
   JsonObject root = jsonBuffer.to<JsonObject>();
 
   root["deviceid"] = hub.getDeviceId();
-  root["buttonStateChanged"] = "TRUE";
+  root["waterSensorStateChanged"] = "TRUE";
   root["utc"] = Time.format(Time.now(), TIME_FORMAT_ISO8601_FULL).c_str();
   root["mem"] = System.freeMemory();
   root["id"] = ++msgId;

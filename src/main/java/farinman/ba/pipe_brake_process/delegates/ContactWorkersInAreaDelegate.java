@@ -18,18 +18,23 @@ import farinman.ba.pipe_brake_process.entities.FacilityWorker;
 import farinman.ba.pipe_brake_process.entities.Person;
 import farinman.ba.pipe_brake_process.helpers.SendMailHelper;
 
+
 /**
- * 
- * 
- * 
- * 
- * 
+ * Klasse ContactWorkersInAreaDelegate generiert anhand der Prozessvariablen, eine Nachricht mit den 
+ * Angaben der Mitarbeiter in der Zone des Gebäudes. Im Text werden die Daten des Hauptmieters, Gebäude, Gerät und Wohnung geschrieben.
+ * Die Nachricht wird mit der Helper-Klasse "SendMailHelper" einzel an jeden Mitarbeiter gesendet.
  * 
  */
 @Named("contactWorkersInAreaAdapter")
 public class ContactWorkersInAreaDelegate extends SendMailHelper implements JavaDelegate {
 	
 	
+	/**
+	 * Execute.
+	 *
+	 * @param execution the execution
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 

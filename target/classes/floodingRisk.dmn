@@ -84,7 +84,7 @@
           <text>6</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0zczs8x">
-          <text>[1..2]</text>
+          <text>[1..4]</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_07h5tu8">
           <text>"ok"</text>

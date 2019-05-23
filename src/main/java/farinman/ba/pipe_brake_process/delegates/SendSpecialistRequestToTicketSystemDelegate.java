@@ -15,11 +15,22 @@ import farinman.ba.pipe_brake_process.entities.Dwelling;
 import farinman.ba.pipe_brake_process.entities.Person;
 import farinman.ba.pipe_brake_process.helpers.SendMailHelper;
 
+/**
+ * Die Klasse SendSpecialistRequestToTicketSystemDelegate generiert eine Mail, welche ein Ticket auf dem Ticketsystem eröffnet, um einen Spezialisten zu kontaktieren.
+ * Im Text werden die Daten des Hauptmieters, Gebäude, Gerät und Wohnung geschrieben.
+ * Die Nachricht wird mit der Helper-Klasse "SendMailHelper" an die Mail des Ticketsystems gesendet.
+ */
 @Named("sendSpecialistRequestToTicketSystemAdapter")
 public class SendSpecialistRequestToTicketSystemDelegate extends SendMailHelper implements JavaDelegate{
 
 
 	
+	/**
+	 * Execute.
+	 *
+	 * @param execution the execution
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		

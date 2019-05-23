@@ -19,12 +19,24 @@ import org.springframework.web.client.RestTemplate;
 import farinman.ba.pipe_brake_process.entities.Device;
 import farinman.ba.pipe_brake_process.repositories.DeviceRepository;
 
+
+/**
+ * Die Klasse CloseWaterDelegate generiert anhand der Daten des Gerätes eine URL für die REST-Anfrage an Particle,
+ * um den Aktuator Wasserstopp anzusteuern.
+ */
 @Named("closeWaterAdapter")
 public class CloseWaterDelegate implements JavaDelegate{
 
+	/** The device repository. */
 	@Autowired
 	DeviceRepository deviceRepository;
 	
+	/**
+	 * Execute.
+	 *
+	 * @param execution the execution
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
@@ -37,7 +49,7 @@ public class CloseWaterDelegate implements JavaDelegate{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-
+		
 	    RestTemplate restTemplate = new RestTemplate();
 	    
 	    ResponseEntity<String> s = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
