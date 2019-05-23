@@ -3,6 +3,7 @@
 - Photn + Bread
 - Buzzer
 - Wassersensor
+- Servomotor
 - Verbindungskabel
 - Particle Account
 - Azure Account
